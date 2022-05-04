@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "libft.h"
+#include "stack.h"
 
 int	n_in_array(int n, int *array, int len)
 {
@@ -47,16 +48,16 @@ int	main(int ac, char **av)
 		puts("Numeros repetidos");
 		return (-1);
 	}
-	int i = -1;
-	t_list	*stack;
 
-	while (++i < ac - 1)
-		printf("%d: %d\n", i, numbers[i]);
-	
-	stack = make_stack(numbers, ac - 1);
-	while (stack)
+	t_stack_ptr	stack = NULL;
+	int i = ac - 1;
+	while (--i >= 0)
 	{
-		printf("stack: %d\n", *((int *)stack->content));
-		stack = stack->next;
+		/*printf("%d: %d\n", i, numbers[i]);*/
+		push(&stack, numbers[i]);
 	}
+	
+	print_stack(stack);
+	/*printf("top: %d\n", top(stack));*/
+	free_stack(&stack);
 }
