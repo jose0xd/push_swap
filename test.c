@@ -30,16 +30,6 @@ int	*parse_numbers(int ac, char **av)
 	return (numbers);
 }
 
-t_list	*make_stack(int *numbers, int len)
-{
-	t_list	*stack;
-
-	stack = NULL;
-	while (--len >= 0)
-		ft_lstadd_front(&stack, ft_lstnew(&numbers[len]));
-	return (stack);
-}
-
 int	main(int ac, char **av)
 {
 	int	*numbers = parse_numbers(ac - 1, av + 1);
@@ -52,12 +42,35 @@ int	main(int ac, char **av)
 	t_stack_ptr	stack = NULL;
 	int i = ac - 1;
 	while (--i >= 0)
-	{
-		/*printf("%d: %d\n", i, numbers[i]);*/
 		push(&stack, numbers[i]);
-	}
-	
 	print_stack(stack);
-	/*printf("top: %d\n", top(stack));*/
+
+	t_stack_ptr stack_b = NULL;
+	char	op[20];
+	while (42)
+	{
+		scanf("%s", op);
+		if (!ft_strncmp(op, "sa", 2))
+			sx(stack);
+		else if (!ft_strncmp(op, "pa", 2))
+			px(&stack, &stack_b);
+		else if (!ft_strncmp(op, "pb", 2))
+			px(&stack_b, &stack);
+		else if (!ft_strncmp(op, "ra", 2))
+			rx(stack);
+		else if (!ft_strncmp(op, "rra", 3))
+			rrx(stack);
+		else if (!ft_strncmp(op, "q", 1))
+			break;
+		puts("------------");
+		print_stack(stack);
+		puts("............");
+		print_stack(stack_b);
+	}
+	print_stack(stack);
+
+		
+
+
 	free_stack(&stack);
 }
