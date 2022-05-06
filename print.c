@@ -1,45 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   actions.c                                          :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jarredon <jarredon@student.42malaga>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/06 13:38:36 by jarredon          #+#    #+#             */
-/*   Updated: 2022/05/06 13:38:39 by jarredon         ###   ########.fr       */
+/*   Created: 2022/05/06 13:38:54 by jarredon          #+#    #+#             */
+/*   Updated: 2022/05/06 13:38:56 by jarredon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "stack.h"
 
-void	sx(t_stack_ptr stack)
+void	print_stack(t_stack_ptr stack)
 {
-	int	temp;
+	t_node	*node;
 
 	if (!stack)
+	{
+		ft_putstr_fd("Empty stack\n", 1);
 		return ;
-	temp = stack->top->n;
-	stack->top->n = stack->top->next->n;
-	stack->top->next->n = temp;
-}
-
-void	px(t_stack_ptr *dst, t_stack_ptr *src)
-{
-	if (!*src)
-		return ;
-	push(dst, pop(src));
-}
-
-void	rx(t_stack_ptr stack)
-{
-	if (!stack)
-		return ;
-	stack->top = stack->top->next;
-}
-
-void	rrx(t_stack_ptr stack)
-{
-	if (!stack)
-		return ;
-	stack->top = stack->top->prev;
+	}
+	node = stack->top;
+	ft_putnbr_fd(node->n, 1);
+	ft_putchar_fd('\n', 1);
+	node = node->next;
+	while (node != stack->top)
+	{
+		ft_putnbr_fd(node->n, 1);
+		ft_putchar_fd('\n', 1);
+		node = node->next;
+	}
 }

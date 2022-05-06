@@ -6,7 +6,7 @@
 /*   By: jarredon <jarredon@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:02:37 by jarredon          #+#    #+#             */
-/*   Updated: 2022/05/04 13:02:38 by jarredon         ###   ########.fr       */
+/*   Updated: 2022/05/06 12:34:31 by jarredon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,23 +87,19 @@ void	free_stack(t_stack_ptr *stack)
 	*stack = NULL;
 }
 
-void	print_stack(t_stack_ptr stack)
+int	len_stack(t_stack_ptr stack)
 {
 	t_node	*node;
+	int		len;
 
 	if (!stack)
-	{
-		ft_putstr_fd("Empty stack\n", 1);
-		return ;
-	}
-	node = stack->top;
-	ft_putnbr_fd(node->n, 1);
-	ft_putchar_fd('\n', 1);
-	node = node->next;
+		return (0);
+	node = stack->top->next;
+	len = 1;
 	while (node != stack->top)
 	{
-		ft_putnbr_fd(node->n, 1);
-		ft_putchar_fd('\n', 1);
+		len++;
 		node = node->next;
 	}
+	return (len);
 }

@@ -30,6 +30,35 @@ int	*parse_numbers(int ac, char **av)
 	return (numbers);
 }
 
+// better name?
+t_stack_ptr	normalize(int **input, int len)
+{
+	int			*copy;
+	int			i;
+	t_stack_ptr	stack;
+	int			n;
+	int			*temp;
+
+	copy = (int *)malloc(len * sizeof(int));
+	if (!copy)
+		return (NULL);
+	copy = ft_memcpy(copy, *input, len * sizeof(int));
+	ft_qsort_int(copy, len);
+	stack = NULL;
+	i = len;
+	while (--i  >= 0)
+	{
+		n = 0;
+		while ((*input)[i] != copy[n])
+			n++;
+		push(&stack, n);
+	}
+	temp = *input;
+	*input = copy;
+	free(temp);
+	return (stack);
+}
+
 int	main(int ac, char **av)
 {
 	int	*numbers = parse_numbers(ac - 1, av + 1);
@@ -39,10 +68,8 @@ int	main(int ac, char **av)
 		return (-1);
 	}
 
-	t_stack_ptr	stack = NULL;
-	int i = ac - 1;
-	while (--i >= 0)
-		push(&stack, numbers[i]);
+	t_stack_ptr	stack;
+	stack = normalize(&numbers, ac - 1);
 	print_stack(stack);
 
 	t_stack_ptr stack_b = NULL;
@@ -64,8 +91,9 @@ int	main(int ac, char **av)
 			break;
 		puts("------------");
 		print_stack(stack);
-		puts("............");
+		printf("........... len A: %d\n", len_stack(stack));
 		print_stack(stack_b);
+		printf("------------ len B: %d\n\n", len_stack(stack_b));
 	}
 	print_stack(stack);
 
@@ -73,4 +101,7 @@ int	main(int ac, char **av)
 
 
 	free_stack(&stack);
+	free_stack(&stack_b);
+	free(numbers);
+	system("valgrind test");
 }
