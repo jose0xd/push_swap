@@ -9,5 +9,5 @@ SRC = *.c
 NAME = test
 
 all: $(SRC) $(LIB)/libft.a
-	make -C $(LIB)
+	make -C $(LIB) bonus
 	$(CC) $(CFLAGS) -I$(INC) $(SRC) -o $(NAME) -L$(LIB) -lft

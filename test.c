@@ -68,40 +68,30 @@ int	main(int ac, char **av)
 		return (-1);
 	}
 
-	t_stack_ptr	stack;
-	stack = normalize(&numbers, ac - 1);
-	print_stack(stack);
+	t_stack_ptr	stack_a;
+	stack_a = normalize(&numbers, ac - 1);
+	print_stack(stack_a);
 
 	t_stack_ptr stack_b = NULL;
+	t_orders	*orders = NULL;
 	char	op[20];
 	while (42)
 	{
 		scanf("%s", op);
-		if (!ft_strncmp(op, "sa", 2))
-			sx(stack);
-		else if (!ft_strncmp(op, "pa", 2))
-			px(&stack, &stack_b);
-		else if (!ft_strncmp(op, "pb", 2))
-			px(&stack_b, &stack);
-		else if (!ft_strncmp(op, "ra", 2))
-			rx(stack);
-		else if (!ft_strncmp(op, "rra", 3))
-			rrx(stack);
-		else if (!ft_strncmp(op, "q", 1))
+		if (!ft_strncmp(op, "q", 1))
 			break;
+		do_action(op, &stack_a, &stack_b, &orders);
 		puts("------------");
-		print_stack(stack);
-		printf("........... len A: %d\n", len_stack(stack));
+		print_stack(stack_a);
+		printf("........... len A: %d\n", len_stack(stack_a));
 		print_stack(stack_b);
 		printf("------------ len B: %d\n\n", len_stack(stack_b));
 	}
-	print_stack(stack);
+	print_orders(orders);
 
-		
-
-
-	free_stack(&stack);
+	free_stack(&stack_a);
 	free_stack(&stack_b);
+	free_orders(&orders);
 	free(numbers);
 	system("valgrind test");
 }
