@@ -70,28 +70,47 @@ int	main(int ac, char **av)
 
 	t_stack_ptr	stack_a;
 	stack_a = normalize(&numbers, ac - 1);
-	print_stack(stack_a);
 
 	t_stack_ptr stack_b = NULL;
 	t_orders	*orders = NULL;
-	char	op[20];
-	while (42)
+	/*
+	 *char	op[20];
+	 *while (42)
+	 *{
+	 *    scanf("%s", op);
+	 *    if (!ft_strncmp(op, "q", 1))
+	 *        break;
+	 *    do_action(op, &stack_a, &stack_b, &orders);
+	 *    puts("------------");
+	 *    print_stack(stack_a);
+	 *    printf("........... len A: %d, sort: %d\n", len_stack(stack_a), is_sort(stack_a));
+	 *    print_stack(stack_b);
+	 *    printf("------------ len B: %d, sort: %d\n\n", len_stack(stack_b), is_sort(stack_b));
+	 *}
+	 *print_orders(orders);
+	 */
+
+	print_stack(stack_a);
+	if (!is_sort(stack_a))
 	{
-		scanf("%s", op);
-		if (!ft_strncmp(op, "q", 1))
-			break;
-		do_action(op, &stack_a, &stack_b, &orders);
-		puts("------------");
-		print_stack(stack_a);
-		printf("........... len A: %d\n", len_stack(stack_a));
-		print_stack(stack_b);
-		printf("------------ len B: %d\n\n", len_stack(stack_b));
+		if (ac - 1 == 2)
+			do_action("ra", &stack_a, &stack_b, &orders);
+		else if (ac - 1 == 3)
+			only_three(&stack_a, &stack_b, &orders);
+		else if (ac - 1 <= 5)
+			more_than_three(&stack_a, &stack_b, &orders);
+		else
+			radix(&stack_a, &stack_b, &orders);
 	}
+
+	puts("\nSort:");
+	print_stack(stack_a);
+	puts("\nOrders:");
 	print_orders(orders);
 
 	free_stack(&stack_a);
 	free_stack(&stack_b);
 	free_orders(&orders);
 	free(numbers);
-	system("valgrind test");
+	//system("valgrind test");
 }

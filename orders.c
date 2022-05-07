@@ -72,6 +72,8 @@ void	print_orders(t_orders *orders)
 {
 	t_list	*order;
 
+	if (!orders)
+		return ;
 	order = orders->first;
 	while (order)
 	{

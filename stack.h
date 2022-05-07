@@ -6,7 +6,7 @@
 /*   By: jarredon <jarredon@student.42malaga>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 08:21:42 by jarredon          #+#    #+#             */
-/*   Updated: 2022/05/07 09:42:42 by jarredon         ###   ########.fr       */
+/*   Updated: 2022/05/07 22:17:23 by jarredon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,10 @@ void	do_action(char *action, t_stack_ptr *stack_a,
 			t_stack_ptr *stack_b, t_orders **orders);
 void	print_orders(t_orders *orders);
 void	free_orders(t_orders **orders);
+
+int		is_sort(t_stack_ptr stack);
+void	radix(t_stack_ptr *stack_a, t_stack_ptr *stack_b, t_orders **orders);
+void	only_three(t_stack_ptr *stack_a, t_stack_ptr *stack_b, t_orders **orders);
+void	more_than_three(t_stack_ptr *stack_a, t_stack_ptr *stack_b, t_orders **orders);
 
 #endif
