@@ -6,13 +6,12 @@
 /*   By: jarredon <jarredon@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:02:37 by jarredon          #+#    #+#             */
-/*   Updated: 2022/05/06 12:34:31 by jarredon         ###   ########.fr       */
+/*   Updated: 2022/05/08 21:32:11 by jarredon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "libft.h"
-#include "stack.h"
+#include "push_swap.h"
 
 // stack cannot be NULL
 int	top(t_stack_ptr stack)

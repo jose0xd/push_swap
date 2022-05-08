@@ -6,7 +6,7 @@
 /*   By: jarredon <jarredon@student.42malaga>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 12:11:23 by jarredon          #+#    #+#             */
-/*   Updated: 2022/05/06 13:38:19 by jarredon         ###   ########.fr       */
+/*   Updated: 2022/05/08 21:07:04 by jarredon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,12 @@ void	ft_qsort(void *array, unsigned int nitems,
 		sort(array, size, cmp, 0, (nitems - 1) * size);
 }
 
-static int	type_cmp(void *a, void *b)
+static int	int_cmp(void *a, void *b)
 {
 	return ((*(int *)a) - (*(int *)b));
 }
 
 void	ft_qsort_int(int *array, unsigned int nitems)
 {
-	ft_qsort(array, nitems, sizeof(int), type_cmp);
+	ft_qsort(array, nitems, sizeof(int), int_cmp);
 }

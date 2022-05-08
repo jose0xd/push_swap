@@ -6,12 +6,11 @@
 /*   By: jarredon <jarredon@student.42malaga>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 13:38:54 by jarredon          #+#    #+#             */
-/*   Updated: 2022/05/06 13:38:56 by jarredon         ###   ########.fr       */
+/*   Updated: 2022/05/08 21:31:16 by jarredon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "stack.h"
+#include "push_swap.h"
 
 void	print_stack(t_stack_ptr stack)
 {

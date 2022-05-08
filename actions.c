@@ -6,11 +6,11 @@
 /*   By: jarredon <jarredon@student.42malaga>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 13:38:36 by jarredon          #+#    #+#             */
-/*   Updated: 2022/05/06 13:38:39 by jarredon         ###   ########.fr       */
+/*   Updated: 2022/05/08 21:28:49 by jarredon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack.h"
+#include "push_swap.h"
 
 void	sx(t_stack_ptr stack)
 {

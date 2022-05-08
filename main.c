@@ -1,9 +1,19 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include "libft.h"
-#include "stack.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jarredon <jarredon@student.42malaga>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/08 21:15:29 by jarredon          #+#    #+#             */
+/*   Updated: 2022/05/08 21:33:08 by jarredon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int	n_in_array(int n, int *array, int len)
+#include <stdlib.h>
+#include "push_swap.h"
+
+static int	n_in_array(int n, int *array, int len)
 {
 	while (len-- > 0)
 		if (n == *array++)
@@ -11,7 +21,7 @@ int	n_in_array(int n, int *array, int len)
 	return (0);
 }
 
-int	valid_number(char *str)
+static int	valid_number(char *str)
 {
 	if (!str)
 		return (0);
@@ -27,7 +37,7 @@ int	valid_number(char *str)
 	return (1);
 }
 
-int	*parse_numbers(int ac, char **av)
+static int	*parse_numbers(int ac, char **av)
 {
 	int	*numbers;
 	int	len;
@@ -54,8 +64,7 @@ int	*parse_numbers(int ac, char **av)
 	return (numbers);
 }
 
-// better name?
-t_stack_ptr	normalize(int **input, int len)
+static t_stack_ptr	normalize(int **input, int len)
 {
 	int			*copy;
 	int			i;
@@ -98,9 +107,7 @@ int	main(int ac, char **av)
 	orders = NULL;
 	if (!is_sort(stack_a))
 	{
-		if (ac - 1 == 2)
-			do_action("ra", &stack_a, &stack_b, &orders);
-		else if (ac - 1 == 3)
+		if (ac - 1 == 3)
 			only_three(&stack_a, &stack_b, &orders);
 		else if (ac - 1 <= 5)
 			more_than_three(&stack_a, &stack_b, &orders);

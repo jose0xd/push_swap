@@ -6,13 +6,12 @@
 /*   By: jarredon <jarredon@student.42malaga>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 09:02:13 by jarredon          #+#    #+#             */
-/*   Updated: 2022/05/08 09:02:14 by jarredon         ###   ########.fr       */
+/*   Updated: 2022/05/08 21:29:55 by jarredon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "libft.h"
-#include "stack.h"
+#include "push_swap.h"
 
 static void	add_order(t_orders **orders, char *instr)
 {
