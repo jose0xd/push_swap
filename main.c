@@ -6,7 +6,7 @@
 /*   By: jarredon <jarredon@student.42malaga>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 21:15:29 by jarredon          #+#    #+#             */
-/*   Updated: 2022/05/08 21:33:08 by jarredon         ###   ########.fr       */
+/*   Updated: 2022/05/09 07:29:57 by jarredon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ static int	n_in_array(int n, int *array, int len)
 	return (0);
 }
 
+// TODO "-"
 static int	valid_number(char *str)
 {
 	if (!str)
 		return (0);
-	if (!ft_isdigit(*str) && *str != '-' && *str != '+')
-		return (0);
-	str++;
+	if ((*str == '-' || *str == '+') && *(str + 1) != '\0')
+		str++;
 	while (*str)
 	{
 		if (!ft_isdigit(*str))
@@ -50,6 +50,7 @@ static int	*parse_numbers(int ac, char **av)
 		if (!valid_number(av[len]))
 		{
 			ft_putstr_fd("Error\n", 2);
+			free(numbers);
 			return (NULL);
 		}
 		num = ft_atoi(av[len]);
@@ -57,6 +58,7 @@ static int	*parse_numbers(int ac, char **av)
 			|| ((num == 0 || num == -1) && ft_strlen(av[len]) > 2))
 		{
 			ft_putstr_fd("Error\n", 2);
+			free(numbers);
 			return (NULL);
 		}
 		numbers[len++] = num;
