@@ -39,13 +39,14 @@ int	*parse_numbers(int ac, char **av)
 	{
 		if (!valid_number(av[len]))
 		{
-			ft_putstr_fd("Invalid number\n", 2);
+			ft_putstr_fd("Error\n", 2);
 			return (NULL);
 		}
 		num = ft_atoi(av[len]);
-		if (n_in_array(num, numbers, len))
+		if (n_in_array(num, numbers, len)
+			|| ((num == 0 || num == -1) && ft_strlen(av[len]) > 2))
 		{
-			ft_putstr_fd("Repeated numbers\n", 2);
+			ft_putstr_fd("Error\n", 2);
 			return (NULL);
 		}
 		numbers[len++] = num;

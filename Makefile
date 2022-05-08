@@ -6,7 +6,7 @@ LIB = libft
 
 SRC = *.c
 
-NAME = test
+NAME = push_swap
 
 all: $(SRC) $(LIB)/libft.a
 	make -C $(LIB) bonus
