@@ -11,6 +11,22 @@ int	n_in_array(int n, int *array, int len)
 	return (0);
 }
 
+int	valid_number(char *str)
+{
+	if (!str)
+		return (0);
+	if (!ft_isdigit(*str) && *str != '-' && *str != '+')
+		return (0);
+	str++;
+	while (*str)
+	{
+		if (!ft_isdigit(*str))
+			return (0);
+		str++;
+	}
+	return (1);
+}
+
 int	*parse_numbers(int ac, char **av)
 {
 	int	*numbers;
@@ -21,10 +37,17 @@ int	*parse_numbers(int ac, char **av)
 	len = 0;
 	while (len < ac)
 	{
-		//TODO comprobar que sean números válidos
+		if (!valid_number(av[len]))
+		{
+			ft_putstr_fd("Invalid number\n", 2);
+			return (NULL);
+		}
 		num = ft_atoi(av[len]);
 		if (n_in_array(num, numbers, len))
+		{
+			ft_putstr_fd("Repeated numbers\n", 2);
 			return (NULL);
+		}
 		numbers[len++] = num;
 	}
 	return (numbers);
@@ -46,7 +69,7 @@ t_stack_ptr	normalize(int **input, int len)
 	ft_qsort_int(copy, len);
 	stack = NULL;
 	i = len;
-	while (--i  >= 0)
+	while (--i >= 0)
 	{
 		n = 0;
 		while ((*input)[i] != copy[n])
@@ -61,36 +84,17 @@ t_stack_ptr	normalize(int **input, int len)
 
 int	main(int ac, char **av)
 {
-	int	*numbers = parse_numbers(ac - 1, av + 1);
-	if (!numbers)
-	{
-		puts("Numeros repetidos");
-		return (-1);
-	}
-
+	int			*numbers;
 	t_stack_ptr	stack_a;
+	t_stack_ptr	stack_b;
+	t_orders	*orders;
+
+	numbers = parse_numbers(ac - 1, av + 1);
+	if (!numbers)
+		return (-1);
 	stack_a = normalize(&numbers, ac - 1);
-
-	t_stack_ptr stack_b = NULL;
-	t_orders	*orders = NULL;
-	/*
-	 *char	op[20];
-	 *while (42)
-	 *{
-	 *    scanf("%s", op);
-	 *    if (!ft_strncmp(op, "q", 1))
-	 *        break;
-	 *    do_action(op, &stack_a, &stack_b, &orders);
-	 *    puts("------------");
-	 *    print_stack(stack_a);
-	 *    printf("........... len A: %d, sort: %d\n", len_stack(stack_a), is_sort(stack_a));
-	 *    print_stack(stack_b);
-	 *    printf("------------ len B: %d, sort: %d\n\n", len_stack(stack_b), is_sort(stack_b));
-	 *}
-	 *print_orders(orders);
-	 */
-
-	print_stack(stack_a);
+	stack_b = NULL;
+	orders = NULL;
 	if (!is_sort(stack_a))
 	{
 		if (ac - 1 == 2)
@@ -102,15 +106,9 @@ int	main(int ac, char **av)
 		else
 			radix(&stack_a, &stack_b, &orders);
 	}
-
-	puts("\nSort:");
-	print_stack(stack_a);
-	puts("\nOrders:");
 	print_orders(orders);
-
+	free(numbers);
 	free_stack(&stack_a);
 	free_stack(&stack_b);
 	free_orders(&orders);
-	free(numbers);
-	//system("valgrind test");
 }

@@ -6,7 +6,7 @@
 /*   By: jarredon <jarredon@student.42malaga>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 20:48:00 by jarredon          #+#    #+#             */
-/*   Updated: 2022/05/08 08:33:51 by jarredon         ###   ########.fr       */
+/*   Updated: 2022/05/08 09:01:06 by jarredon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ void	radix(t_stack_ptr *stack_a, t_stack_ptr *stack_b, t_orders **orders)
 
 // We compare top to middle, middle to bottom, and bottom to top.
 // There are 5 situations (6 if we count the sort situation)
-void	only_three(t_stack_ptr *stack_a, t_stack_ptr *stack_b, t_orders **orders)
+void	only_three(t_stack_ptr *stack_a, t_stack_ptr *stack_b,
+		t_orders **orders)
 {
 	char	situation;
 
@@ -83,7 +84,8 @@ void	only_three(t_stack_ptr *stack_a, t_stack_ptr *stack_b, t_orders **orders)
 	}
 }
 
-void	more_than_three(t_stack_ptr *stack_a, t_stack_ptr *stack_b, t_orders **orders)
+void	more_than_three(t_stack_ptr *stack_a, t_stack_ptr *stack_b,
+		t_orders **orders)
 {
 	t_node	*max;
 	char	*op;
@@ -94,7 +96,8 @@ void	more_than_three(t_stack_ptr *stack_a, t_stack_ptr *stack_b, t_orders **orde
 	max = (*stack_a)->top->prev;
 	while (*stack_b)
 	{
-		if (top(*stack_a) > top(*stack_b) && top(*stack_b) > (*stack_a)->top->prev->n)
+		if (top(*stack_a) > top(*stack_b)
+			&& top(*stack_b) > (*stack_a)->top->prev->n)
 			do_action("pa", stack_a, stack_b, orders);
 		else if ((*stack_a)->top->prev == max && top(*stack_b) > max->n)
 		{

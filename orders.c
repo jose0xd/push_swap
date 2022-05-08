@@ -1,13 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   orders.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jarredon <jarredon@student.42malaga>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/08 09:02:13 by jarredon          #+#    #+#             */
+/*   Updated: 2022/05/08 09:02:14 by jarredon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include "libft.h"
-
 #include "stack.h"
-
-/*typedef struct s_orders*/
-/*{*/
-	/*t_list	*first;*/
-	/*t_list	*last;*/
-/*}			t_orders;*/
 
 static void	add_order(t_orders **orders, char *instr)
 {
