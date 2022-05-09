@@ -6,7 +6,7 @@
 /*   By: jarredon <jarredon@student.42malaga>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 20:48:00 by jarredon          #+#    #+#             */
-/*   Updated: 2022/05/08 22:25:47 by jarredon         ###   ########.fr       */
+/*   Updated: 2022/05/09 12:14:33 by jarredon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,25 @@ void	only_three(t_stack_ptr *stack_a, t_stack_ptr *stack_b,
 	}
 }
 
+static void	reinsert(t_stack_ptr *stack_a, t_stack_ptr *stack_b,
+		t_orders **orders, t_node **max)
+{
+	while (*stack_b)
+	{
+		if ((top(*stack_a) > top(*stack_b)
+				&& top(*stack_b) > (*stack_a)->top->prev->n)
+			|| ((*stack_a)->top->prev == *max
+				&& (top(*stack_b) > (*max)->n || top(*stack_b) < top(*stack_a))))
+		{
+			do_action("pa", stack_a, stack_b, orders);
+			if (top(*stack_a) > (*max)->n)
+				*max = (*stack_a)->top;
+		}
+		else
+			do_action("ra", stack_a, stack_b, orders);
+	}
+}
+
 void	more_than_three(t_stack_ptr *stack_a, t_stack_ptr *stack_b,
 		t_orders **orders)
 {
@@ -95,19 +114,7 @@ void	more_than_three(t_stack_ptr *stack_a, t_stack_ptr *stack_b,
 		do_action("pb", stack_a, stack_b, orders);
 	only_three(stack_a, stack_b, orders);
 	max = (*stack_a)->top->prev;
-	while (*stack_b)
-	{
-		if ((top(*stack_a) > top(*stack_b)
-				&& top(*stack_b) > (*stack_a)->top->prev->n)
-			|| ((*stack_a)->top->prev == max
-				&& (top(*stack_b) > max->n || top(*stack_b) < top(*stack_a))))
-		{
-			do_action("pa", stack_a, stack_b, orders);
-			if (top(*stack_a) > max->n)
-				max = (*stack_a)->top;
-		}
-		do_action("ra", stack_a, stack_b, orders);
-	}
+	reinsert(stack_a, stack_b, orders, &max);
 	op = "rra";
 	if ((*stack_a)->top == max || (*stack_a)->top->next == max)
 		op = "ra";
