@@ -3,12 +3,16 @@ CFLAGS = -Wall -Werror -Wextra
 
 INC = libft
 LIB = libft
-
-SRC = actions.c algo.c main.c orders.c print.c qsort.c stack.c
-OBJ = $(SRC:.c=.o)
 LIB_AR = $(LIB)/libft.a
 
+SRC_FUN = actions.c algo.c orders.c parser.c print.c qsort.c stack.c
+SRC = $(SRC_FUN) main.c
+OBJ = $(SRC:.c=.o)
+SRC_BONUS = $(SRC_FUN) checker_bonus.c get_line_bonus.c
+OBJ_BONUS = $(SRC_BONUS:.c=.o)
+
 NAME = push_swap
+BONUS = checker
 
 all: $(NAME)
 
@@ -18,7 +22,7 @@ all: $(NAME)
 $(LIB_AR):
 	$(MAKE) -C $(LIB) bonus
 
-$(NAME): $(OBJ) $(LIB_AR)
+$(NAME): $(LIB_AR) $(OBJ)
 	$(CC) $(OBJ) -o $(NAME) -L$(LIB) -lft
 
 clean:
@@ -32,4 +36,7 @@ fclean: clean
 re: fclean
 	$(MAKE)
 
-.PHONY: all clean fclean re
+bonus: $(LIB_AR) $(OBJ_BONUS)
+	$(CC) $(OBJ_BONUS) -o $(BONUS) -L$(LIB) -lft
+
+.PHONY: all clean fclean re bonus
